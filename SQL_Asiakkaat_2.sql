@@ -4,17 +4,25 @@
 --SELECT * FROM Tilaus_Taulu;
 --SELECT * FROM TilausRivi_Taulu;
 
-SELECT Tuote_Taulu.Hinta, Tuote_Taulu.Tuote, TilausRivi_Taulu.Maara
-FROM Tuote_Taulu, Asiakas_Taulu,TilausRivi_Taulu;
 
-SELECT Asiakas_Taulu.Etunimi,Tuote_Taulu.Tuote
-FROM Asiakas_Taulu,Tuote_Taulu;
+SELECT Tuote_Taulu.Tuote,
+SUM(TilausRivi_Taulu.Maara) AS LukuMaara
+FROM Tuote_Taulu,TilausRivi_Taulu
+WHERE Tuote_Taulu.Tuotenumero = TilausRivi_Taulu.Tuotenumero_id 
+GROUP BY Tuote;
 
-SELECT Tuote,Maara, COUNT(Maara) FROM Tuote_Taulu,TilausRivi_Taulu
-    GROUP BY Tuote, Maara;
+SELECT Maara AS LukuMaara
+FROM TilausRivi_Taulu;
 
-    SELECT SUM(Maara) FROM TilausRivi_Taulu;
 
-    SELECT Tuote,Hinta FROM Tuote_Taulu
-    GROUP BY Hinta,Tuote;
+
+
+--SELECT Tuote,Maara
+--FROM Tuote_Taulu,TilausRivi_Taulu JOIN TilausRivi_Taulu
+--ON Tuote_Taulu.Tuotenumero = TilausRivi_Taulu.Tuotenumero_id;
+
+SELECT Tuote,Hinta FROM Tuote_Taulu
+GROUP BY Hinta,Tuote;
+
+
 
